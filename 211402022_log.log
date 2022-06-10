@@ -1,0 +1,109 @@
+MariaDB [(none)]> SHOW DATABASES;
++---------------------+
+| Database            |
++---------------------+
+| information_schema  |
+| laravel_8_multiauth |
+| mahasiswa           |
+| mysql               |
+| newsportal          |
+| performance_schema  |
+| phpmyadmin          |
+| posting             |
+| prak_sbd            |
+| proweb              |
+| ruang_coding        |
+| task_manager        |
+| tes_user            |
+| test                |
+| tokoku              |
+| tubes_laravel       |
+| tubes_pwl           |
+| website_laravel     |
++---------------------+
+18 rows in set (0.001 sec)
+
+MariaDB [(none)]> USE task_manager;
+Database changed
+MariaDB [task_manager]>  SELECT* FROM task_manager;
+ERROR 1146 (42S02): Table 'task_manager.task_manager' doesn't exist
+MariaDB [task_manager]>  SELECT* FROM task_dailies;
+Empty set (0.002 sec)
+
+MariaDB [task_manager]>  SELECT* FROM task_plans;
++--------------------------------------+-----------------------------------------+--------------------+-------------------+--------------------------------------+--------------------------------------+--------------------------------------+---------------+-------------+------------+------------+
+| id                                   | task_name                               | ask_duration_start | task_duration_end | user_create                          | category_id                          | indicators_id                        | task_priority | task_status | created_at | updated_at |
++--------------------------------------+-----------------------------------------+--------------------+-------------------+--------------------------------------+--------------------------------------+--------------------------------------+---------------+-------------+------------+------------+
+| 924eaa0e-c8f1-4132-a032-1d98c176a8c3 | Membuat Modul add_to_cart pada Aplikasi | 2022-06-10         | 2022-06-30        | 72233152-7af0-4e89-94fc-d8d02e73aba8 | 72233152-7af0-4e89-94fc-d8d02e73aba8 | 5e72be09-384e-4097-8e78-c20e84d88112 |             1 | Pending     | NULL       | NULL       |
+| c96fdbd6-a3a4-42e3-b437-444ffd734a36 | Menganalisa Data Kemahasiswaan          | 2022-06-10         | 2022-06-17        | 72233152-7af0-4e89-94fc-d8d02e73aba8 | e46f9318-ca1a-4a3d-a998-913c8fdf5917 | 669c981f-1bd6-47d5-b2ce-de568aaa160a |             2 | Process     | NULL       | NULL       |
+| f1ee037b-9135-41d2-9757-091391df4fb8 | Mendokumentasikan Code                  | 2022-06-10         | 2022-06-10        | 72233152-7af0-4e89-94fc-d8d02e73aba8 | 229d48a0-a643-42c2-832f-882297db9003 | 5e72be09-384e-4097-8e78-c20e84d88112 |             3 | Process     | NULL       | NULL       |
++--------------------------------------+-----------------------------------------+--------------------+-------------------+--------------------------------------+--------------------------------------+--------------------------------------+---------------+-------------+------------+------------+
+3 rows in set (0.000 sec)
+
+MariaDB [task_manager]> SELECT tabel.kolom1, tabel.kolom2,..
+    -> FROM tabel1
+    -> RIGHT JOIN table2
+    -> 
+    -> 
+    -> SELECT 
+    -> a.id, a.task_name, b.task_status, b.task_comments, d.category_name as 'Category',
+    -> DATEDIFF(a.task_duration_end, a.task_duration_start) as 'Lama Pengerjaan',
+    -> c.name as 'Create By', (SELECT name from users where users.id = task_dailies.user_verify_id ) as 'Verified By'
+    -> FROM task_plans a
+    -> RIGHT JOIN task_dailies b ON a.id = b.plan_id
+    -> INNER JOIN users c ON b.id = c.id
+    -> RIGHT JOIN task_categories d ON a.category_id = d.id
+    -> 
+    -> exit;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '..
+FROM tabel1
+RIGHT JOIN table2
+
+
+SELECT 
+a.id, a.task_name, b.task_status, ...' at line 1
+MariaDB [task_manager]> 
+MariaDB [task_manager]> SELECT 
+    -> a.id, a.task_name, b.task_status, b.task_comments, d.category_name as 'Category',
+    -> DATEDIFF(a.task_duration_end, a.task_duration_start) as 'Lama Pengerjaan',
+    -> c.name as 'Create By', (SELECT name from users where users.id = task_dailies.user_verify_id ) as 'Verified By'
+    -> FROM task_plans a
+    -> RIGHT JOIN task_dailies b ON a.id = b.plan_id
+    -> INNER JOIN users c ON b.id = c.id
+    -> RIGHT JOIN task_categories d ON a.category_id = d.id
+    -> exit
+    -> exit;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exit
+exit' at line 9
+MariaDB [task_manager]> CREATE VIEW <nama_view> AS <query
+    -> SELECT>;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '<nama_view> AS <query
+SELECT>' at line 1
+MariaDB [task_manager]> CREATE VIEW <nama_view> AS <query
+    -> exit;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '<nama_view> AS <query
+exit' at line 1
+MariaDB [task_manager]> CREATE VIEW <211402022> AS <query SELECT>;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '<211402022> AS <query SELECT>' at line 1
+MariaDB [task_manager]> CREATE VIEW <211402022_view> AS <query SELECT>;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '<211402022_view> AS <query SELECT>' at line 1
+MariaDB [task_manager]> SELECT 
+    -> a.id, a.task_name, b.task_status, b.task_comments, d.category_name as 'Category',
+    -> DATEDIFF(a.task_duration_end, a.task_duration_start) as 'Lama Pengerjaan',
+    -> c.name as 'Create By', (SELECT name from users where users.id = task_dailies.user_verify_id ) as 'Verified By'
+    -> FROM task_plans a
+    -> RIGHT JOIN task_dailies b ON a.id = b.plan_id
+    -> INNER JOIN users c ON b.id = c.id
+    -> RIGHT JOIN task_dailies b ON a.id = b.plan_id
+    -> exit;
+ERROR 1066 (42000): Not unique table/alias: 'b'
+MariaDB [task_manager]> logging to Raihanjamilahlog
+    -> logging to Raihanjamilah.log
+    -> 
+    -> exit;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'logging to Raihanjamilahlog
+logging to Raihanjamilah.log
+
+exit' at line 1
+MariaDB [task_manager]> SELECT a.id, a.task_name, b.task_status, b.task_comments, d.category_name as 'Category',DATEDIFF(a.task_duration_end, a.task_duration_start) as 'Lama Pengerjaan',c.name as 'Create By', (SELECT name from users where users.id = task_dailies.user_verify_id ) as 'Verified By'FROM task_plans aRIGHT JOIN task_dailies b ON a.id = b.plan_idINNER JOIN users c ON b.id = c.idRIGHT JOIN task_categories d ON a.category_id = d.id
+    -> 
